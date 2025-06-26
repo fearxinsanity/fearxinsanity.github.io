@@ -1,180 +1,94 @@
-/* Importiere eine moderne Schriftart von Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;700&display=swap');
-
-/* Grundlegende Stile */
+/* style.css */
 body {
-    font-family: 'Open Sans', sans-serif; /* Primäre Schriftart */
-    line-height: 1.6;
+    background: #f5f6fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* Sehr heller Hintergrund, fast weiß */
-    color: #333;
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
 }
 
-/* Container für Hauptinhalte - ähnlich wie bei Orano, zentriert und begrenzt */
-.container {
-    width: 90%;
-    max-width: 1100px; /* Max. Breite wie bei Orano */
-    margin: auto;
-    overflow: hidden;
-    padding: 20px 0;
-}
-
-/* Header Bereich */
-header {
-    background: #fff; /* Weißer Header */
-    color: #333; /* Dunkler Text im Header */
-    padding: 20px 0;
-    border-bottom: 1px solid #eee; /* Dezenter Trennstrich */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Leichter Schatten für Tiefe */
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-family: 'Roboto', sans-serif; /* Eine andere, stärkere Schrift für den Titel */
-    font-size: 2.8em;
-    color: #004c99; /* Dunklerer Blauton, Orano-inspiriert */
-    letter-spacing: -1px; /* Etwas engerer Buchstabenabstand */
-}
-
-header p {
-    margin: 5px 0 20px;
-    font-size: 1.2em;
-    color: #555;
-}
-
-header nav ul {
-    padding: 0;
-    list-style: none;
-    text-align: center;
-    margin-top: 20px; /* Etwas mehr Abstand zur Überschrift */
-}
-
-header nav ul li {
-    display: inline-block; /* Für bessere vertikale Ausrichtung als 'inline' */
-    padding: 0 25px; /* Mehr horizontaler Abstand */
-}
-
-header nav a {
-    color: #004c99; /* Akzentfarbe für Links */
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 1em;
-    font-weight: 600; /* Etwas fetter */
-    padding-bottom: 5px; /* Platz für den Unterstrich-Effekt */
-    transition: all 0.3s ease; /* Sanfter Übergang */
-}
-
-header nav a:hover {
-    color: #007bff; /* Hellerer Blauton beim Hover */
-    border-bottom: 2px solid #007bff; /* Unterstrich-Effekt */
-}
-
-/* Hauptinhaltsbereich */
-main {
-    padding: 40px 0; /* Mehr vertikaler Padding */
+.slider-container {
+    max-width: 900px;
+    margin: 40px auto;
     background: #fff;
-    margin: 40px auto; /* Mehr vertikaler Abstand vom Header/Footer */
-    width: 90%;
-    max-width: 1100px; /* Gleiche maximale Breite wie Container */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); /* Stärkerer, weicher Schatten */
-    border-radius: 8px; /* Leicht abgerundete Ecken */
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    overflow: hidden;
+    position: relative;
 }
 
-section {
-    padding: 30px; /* Mehr Innenabstand für Sections */
-    margin-bottom: 0; /* Kein Standard-Margin-Bottom mehr */
-    border-bottom: 1px solid #eee; /* Dezente Trennlinie zwischen Abschnitten */
+.slider {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(.77,0,.18,1);
 }
 
-section:last-child {
-    border-bottom: none;
-}
-
-h2, h3 {
-    font-family: 'Roboto', sans-serif; /* Überschriften in Roboto */
-    color: #004c99;
-    margin-top: 0;
-    margin-bottom: 20px; /* Mehr Abstand unter Überschriften */
-}
-
-h2 {
-    font-size: 2.2em;
-    text-align: center; /* Überschriften zentrieren */
-    padding-bottom: 10px;
-    position: relative; /* Für den Linien-Effekt */
-}
-
-h2::after {
-    content: '';
-    display: block;
-    width: 60px; /* Kurze Linie unter der Überschrift */
-    height: 3px;
-    background: #007bff; /* Akzentfarbe für die Linie */
-    margin: 10px auto 0; /* Zentrieren der Linie */
-}
-
-
-p {
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 1em; /* Abstand zwischen Absätzen */
-}
-
-ul {
-    list-style: disc; /* Oder 'none' für eigene Styling-Bullets */
-    padding-left: 25px;
-    margin-bottom: 1em;
-}
-
-li {
-    margin-bottom: 0.5em;
-    color: #555;
-}
-
-a {
-    color: #007bff; /* Standardlinkfarbe */
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: #004c99;
-}
-
-/* Galerie spezifische Stile */
-.galerie-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Angepasstes Raster für größere Bilder */
-    gap: 30px; /* Mehr Abstand zwischen Bildern */
-    padding: 30px; /* Innenabstand für den Container */
-}
-
-.galerie-container img {
-    width: 100%;
-    height: 200px; /* Feste Höhe für Einheitlichkeit */
-    object-fit: cover; /* Bilder füllen den Bereich aus, ohne verzerrt zu werden */
-    border: none; /* Keine standardmäßige Umrandung */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Weicherer, stärkerer Schatten */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 5px; /* Leicht abgerundete Ecken für Bilder */
-}
-
-.galerie-container img:hover {
-    transform: translateY(-5px); /* Leichtes Anheben */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Stärkerer Schatten beim Hover */
-}
-
-/* Footer */
-footer {
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 60px 40px;
     text-align: center;
-    padding: 30px;
-    background: #004c99; /* Dunkelblauer Footer */
-    color: #fff;
-    margin-top: 40px; /* Mehr Abstand zum Main-Content */
-    font-size: 0.9em;
+    color: #222;
+    background: linear-gradient(120deg, #e6e9f0 0%, #eef1f5 100%);
+}
+
+.slide h2 {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+    color: #0a3d62;
+}
+
+.slide p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.slider-nav {
+    position: absolute;
+    width: 100%;
+    bottom: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.slider-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #d1d8e0;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.slider-dot.active {
+    background: #0a3d62;
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #0a3d62;
+    transition: background 0.2s;
+    z-index: 2;
+}
+
+.slider-arrow:hover {
+    background: #f1f2f6;
+}
+
+.slider-arrow.left {
+    left: 18px;
+}
+
+.slider-arrow.right {
+    right: 18px;
 }
