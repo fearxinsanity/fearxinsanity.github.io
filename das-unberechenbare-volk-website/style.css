@@ -1,0 +1,115 @@
+/* Grundlegende Stile */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #77aaff 3px solid;
+    text-align: center; /* Text im Header zentrieren */
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2.5em;
+    color: #77aaff; /* Blauer Farbton für den Titel */
+}
+
+header p {
+    margin: 5px 0 20px;
+    font-size: 1.1em;
+}
+
+header nav ul {
+    padding: 0;
+    list-style: none;
+    text-align: center; /* Navigation zentrieren */
+}
+
+header nav ul li {
+    display: inline;
+    padding: 0 15px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+header nav a:hover {
+    color: #77aaff; /* Hover-Effekt für Navigation */
+    font-weight: bold;
+}
+
+/* Hauptinhaltsbereich */
+main {
+    padding: 20px;
+    background: #fff;
+    margin: 20px auto;
+    width: 80%; /* Breite des Hauptinhaltsbereichs */
+    max-width: 960px; /* Maximale Breite */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+section:last-child {
+    border-bottom: none; /* Letztem Abschnitt keinen unteren Rand geben */
+}
+
+h2, h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+/* Galerie spezifische Stile */
+.galerie-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsives Raster */
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.galerie-container img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease; /* Sanfter Zoom-Effekt */
+}
+
+.galerie-container img:hover {
+    transform: scale(1.03); /* Bild vergrößern beim Hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #fff;
+    margin-top: 20px;
+}
