@@ -38,7 +38,7 @@ header {
     text-align: center;
     margin: 16px;
     position: relative;
-    box-shadow: 8px 8px 0px var(--pixel-shadow);
+    box-shadow: 8px 8px 0 var(--pixel-shadow);
 }
 
 header::before {
@@ -56,7 +56,7 @@ header h1 {
     margin: 0 0 16px 0;
     font-size: 16px;
     color: var(--primary);
-    text-shadow: 2px 2px 0px var(--pixel-shadow);
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
     letter-spacing: 2px;
 }
 
@@ -96,7 +96,7 @@ nav a:focus,
 nav a[aria-current="page"] {
     background: var(--nav-link);
     color: var(--bg);
-    box-shadow: 4px 4px 0px var(--pixel-shadow);
+    box-shadow: 4px 4px 0 var(--pixel-shadow);
     transform: translate(-2px, -2px);
 }
 
@@ -113,7 +113,7 @@ section {
     margin-bottom: 24px;
     padding: 24px;
     position: relative;
-    box-shadow: 8px 8px 0px var(--pixel-shadow);
+    box-shadow: 8px 8px 0 var(--pixel-shadow);
 }
 
 section::before {
@@ -132,7 +132,7 @@ section h2 {
     font-size: 14px;
     margin-top: 0;
     margin-bottom: 16px;
-    text-shadow: 2px 2px 0px var(--pixel-shadow);
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -150,7 +150,7 @@ section p, section ul {
     color: var(--text-secondary);
     font-size: 8px;
     line-height: 1.8;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 ul {
@@ -189,9 +189,35 @@ section a:hover {
     border: 4px solid var(--border);
     background: var(--accent);
     padding: 4px;
-    box-shadow: 4px 4px 0px var(--pixel-shadow);
+    box-shadow: 4px 4px 0 var(--pixel-shadow);
     image-rendering: pixelated;
 }
+
+/* Countdown Styling */
+#countdown-timer {
+    font-size: 12px;
+    color: var(--accent);
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 0 var(--pixel-shadow);
+    letter-spacing: 1px;
+}
+
+#countdown-timer span {
+    display: inline-block;
+    min-width: 30px; /* Ensure consistent spacing */
+    text-align: right;
+    padding: 4px 0;
+}
+
+.countdown-message {
+    font-size: 10px;
+    color: var(--primary);
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 1px 1px 0 var(--pixel-shadow);
+}
+
 
 /* Footer */
 footer {
@@ -203,7 +229,7 @@ footer {
     margin: 16px;
     border: 2px solid var(--border);
     position: relative;
-    box-shadow: 4px 4px 0px var(--pixel-shadow);
+    box-shadow: 4px 4px 0 var(--pixel-shadow);
     letter-spacing: 1px;
 }
 
@@ -233,7 +259,7 @@ footer::before {
 /* Pixel-Buttons Effekt */
 section:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 12px 12px 0px var(--pixel-shadow);
+    box-shadow: 12px 12px 0 var(--pixel-shadow);
     transition: all 0.1s;
 }
 

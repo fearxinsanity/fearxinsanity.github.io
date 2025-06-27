@@ -1,4 +1,4 @@
-// script.js - Erweiterte Version mit globalem Click-Effekt
+// script.js - Erweiterte Version mit globalem Click-Effekt und separatem Countdown
 
 class PixelTransition {
     constructor() {
@@ -15,7 +15,7 @@ class PixelTransition {
         overlay.innerHTML = this.generatePixelGrid();
         document.body.appendChild(overlay);
 
-        // CSS für Pixel-Overlay hinzufügen
+        // CSS für Pixel-Overlay hinzufügen (from previous style.css)
         const style = document.createElement('style');
         style.textContent = `
             #pixel-overlay {
@@ -277,6 +277,7 @@ class PixelTransition {
             await this.hidePixelOverlay();
 
             this.showTransitionSoundEffect('LOADED!');
+            this.handleContentSpecificInitials(url); // Call for content-specific initializations
 
         } catch (error) {
             console.error('Transition failed:', error);
@@ -457,6 +458,7 @@ class PixelTransition {
         currentMain.innerHTML = newMain.innerHTML;
 
         this.updateActiveNavLink();
+        this.revealSections(); // Trigger reveal for newly loaded content
     }
 
     updateActiveNavLink() {
@@ -470,7 +472,68 @@ class PixelTransition {
             }
         });
     }
+
+    // New method to handle initializations specific to the loaded content
+    handleContentSpecificInitials(url) {
+        const path = url.split('/').pop() || 'index.html';
+        if (path === 'index.html') {
+            // Re-initialize the countdown only if it's the index page
+            if (window.countdownInstance) { // Clear existing interval if instance exists
+                clearInterval(window.countdownInstance.countdownInterval);
+            }
+            window.countdownInstance = new Countdown('2026-03-01T00:00:00', 'countdown-timer', 'countdown-message');
+        }
+    }
 }
+
+// Separate Countdown Class
+class Countdown {
+    constructor(targetDateString, timerElementId, messageElementId) {
+        this.targetDate = new Date(targetDateString).getTime();
+        this.timerElement = document.getElementById(timerElementId);
+        this.messageElement = document.getElementById(messageElementId);
+        this.countdownInterval = null;
+
+        if (this.timerElement && this.messageElement) {
+            this.startCountdown();
+        } else {
+            console.warn('Countdown elements not found. Countdown not initialized.');
+        }
+    }
+
+    startCountdown() {
+        this.updateCountdown(); // Initial call to display immediately
+        // Ensure only one interval is running
+        if (this.countdownInterval) {
+            clearInterval(this.countdownInterval);
+        }
+        this.countdownInterval = setInterval(() => this.updateCountdown(), 1000);
+    }
+
+    updateCountdown() {
+        const now = new Date().getTime();
+        const distance = this.targetDate - now;
+
+        if (distance < 0) {
+            this.timerElement.innerHTML = 'PROJEKT GESTARTET!';
+            this.messageElement.textContent = 'Das Warten hat ein Ende! Tauchen Sie ein in die Simulation.';
+            clearInterval(this.countdownInterval);
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        this.timerElement.querySelector('#days').textContent = days;
+        this.timerElement.querySelector('#hours').textContent = hours;
+        this.timerElement.querySelector('#minutes').textContent = minutes;
+        this.timerElement.querySelector('#seconds').textContent = seconds;
+        this.messageElement.textContent = 'Der Startschuss naht!';
+    }
+}
+
 
 // Optimierte Scroll-Reveal-Funktion
 function revealOnScroll() {
@@ -499,7 +562,11 @@ function throttledReveal() {
 
 // Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
-    new PixelTransition();
+    const pixelTransition = new PixelTransition();
+    // Initial Countdown setup when the page loads
+    if (window.location.pathname.split('/').pop() === 'index.html' || window.location.pathname === '/') {
+        window.countdownInstance = new Countdown('2026-03-01T00:00:00', 'countdown-timer', 'countdown-message');
+    }
     revealOnScroll();
 
     const navLinks = document.querySelectorAll('nav a');
