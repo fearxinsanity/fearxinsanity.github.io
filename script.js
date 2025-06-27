@@ -11,13 +11,14 @@ function revealOnScroll() {
         }
     });
 }
+
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('DOMContentLoaded', revealOnScroll);
 
 // Aktiven Navigationslink hervorheben
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav a');
-    const current = window.location.pathname.split('/').pop();
+    const current = window.location.pathname.split('/').pop() || 'index.html';
     navLinks.forEach(link => {
         if (link.getAttribute('href') === current) {
             link.setAttribute('aria-current', 'page');
