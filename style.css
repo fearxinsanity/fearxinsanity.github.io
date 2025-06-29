@@ -243,37 +243,135 @@ footer {
         font-size: 14px;
     }
 
+    header {
+        margin: 10px;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        position: relative; /* Wichtig für die Positionierung von Kind-Elementen */
+    }
+
+    /* Der Untertitel wird auf Mobilgeräten ausgeblendet, um Platz zu schaffen */
+    header p {
+        display: none;
+    }
+
+    header h1 {
+        font-size: 18px;
+        order: 2; /* Der Titel kommt in der Mitte */
+        width: 100%; /* Nimmt die volle Breite ein */
+        text-align: center;
+        margin: 10px 0 0 0;
+        padding: 0 30px; /* Fügt links und rechts etwas Abstand hinzu, um nicht mit Buttons zu kollidieren */
+    }
+
+    header .header-logo {
+        display: none; /* Blendet das Logo auf Mobilgeräten komplett aus */
+    }
+
+    /* Navigation als ausklappbares Menü */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 10, 0.95);
+        transform: translateX(-100%); /* Startet außerhalb des Bildschirms */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav.nav-open {
+        transform: translateX(0); /* Fährt ins Bild */
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 25px;
+        padding: 0;
+    }
+
+    nav a {
+        font-size: 20px;
+        color: var(--primary);
+        padding: 10px 20px;
+        border: none;
+    }
+
+    nav a:hover, nav a[aria-current="page"] {
+        color: var(--accent);
+        background: none;
+        box-shadow: none;
+    }
+
+    /* Hamburger Menü Button */
+    .nav-toggle {
+        display: block; /* Wird auf Mobilgeräten sichtbar */
+        order: 3; /* Kommt als letztes Element */
+        z-index: 1001; /* Liegt über dem Inhalt, aber unter dem Menü, wenn es offen ist */
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .hamburger {
+        display: block;
+        position: relative;
+        width: 25px;
+        height: 3px;
+        background: var(--primary);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .hamburger::before,
+    .hamburger::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .hamburger::before {
+        top: -8px;
+    }
+
+    .hamburger::after {
+        bottom: -8px;
+    }
+
+    /* Hamburger zu "X" umwandeln, wenn Menü offen ist */
+    .nav-open .nav-toggle .hamburger {
+        background: transparent; /* Mittlerer Strich verschwindet */
+    }
+
+    .nav-open .nav-toggle .hamburger::before {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .nav-open .nav-toggle .hamburger::after {
+        transform: rotate(-45deg) translate(5px, -6px);
+    }
+
     main {
         max-width: 95vw;
         padding: 0 10px;
     }
+}
 
-    section {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    header {
-        margin: 10px;
-        padding: 30px 0;
-    }
-
-    footer {
-        margin: 10px;
-        font-size: 10px;
-    }
-
-    nav ul {
-        gap: 10px;
-    }
-
-    nav a {
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-
-    .galerie-container img {
-        max-width: 90vw;
+/* Stellt sicher, dass der Hamburger-Button auf dem Desktop versteckt ist */
+@media (min-width: 701px) {
+    .nav-toggle {
+        display: none;
     }
 }
 

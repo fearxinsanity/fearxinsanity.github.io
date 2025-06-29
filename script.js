@@ -1,11 +1,10 @@
-// script.js - Illuminati/Freimaurer Stil
+// script.js - Illuminati/Freimaurer Stil (Korrigiertes Timing)
 
 class SecretSocietyTransition {
     constructor() {
         this.isTransitioning = false;
         this.setupEyeOverlay();
         this.initNavigation();
-        this.initGlobalClickEffect();
     }
 
     setupEyeOverlay() {
@@ -33,7 +32,7 @@ class SecretSocietyTransition {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                transition: opacity 0.5s ease-in-out;
+                transition: opacity 0.4s ease-in-out;
             }
 
             #eye-overlay.active {
@@ -77,22 +76,17 @@ class SecretSocietyTransition {
                 100% { transform: scale(1); box-shadow: 0 0 10px var(--primary); }
             }
             
-            .page-transition.fade-out {
+            main.fade-out {
                 opacity: 0;
                 transition: opacity 0.3s ease-out;
             }
+            
+            main.fade-in {
+                opacity: 1;
+                transition: opacity 0.3s ease-in;
+            }
         `;
         document.head.appendChild(style);
-
-        const loading = document.createElement('div');
-        loading.className = 'loading-text';
-        document.body.appendChild(loading);
-    }
-
-    initGlobalClickEffect() {
-        document.addEventListener('click', (e) => {
-            // Optional: Hier könnte ein subtiler Klick-Effekt hinzugefügt werden
-        });
     }
 
     initNavigation() {
@@ -110,8 +104,7 @@ class SecretSocietyTransition {
     }
 
     isInternalLink(href) {
-        return href.includes(window.location.host) &&
-            (href.endsWith('.html') || href === window.location.origin + '/');
+        return new URL(href, window.location.origin).hostname === window.location.hostname;
     }
 
     async transitionToPage(url, pushState = true) {
@@ -123,14 +116,14 @@ class SecretSocietyTransition {
             await this.fadeOutCurrentPage();
 
             const newContent = await this.loadPage(url);
-            this.replacePageContent(newContent);
+            this.replacePageContent(newContent, url);
 
             if (pushState) {
                 history.pushState(null, '', url);
             }
 
             await this.hideEyeOverlay();
-            this.revealSections();
+            this.fadeInNewPage();
 
         } catch (error) {
             console.error('Transition failed:', error);
@@ -144,7 +137,7 @@ class SecretSocietyTransition {
         return new Promise((resolve) => {
             const overlay = document.getElementById('eye-overlay');
             overlay.classList.add('active');
-            setTimeout(resolve, 500);
+            setTimeout(resolve, 400); // Wartet bis die Fade-In Animation beendet ist
         });
     }
 
@@ -152,7 +145,7 @@ class SecretSocietyTransition {
         return new Promise((resolve) => {
             const overlay = document.getElementById('eye-overlay');
             overlay.classList.remove('active');
-            setTimeout(resolve, 500);
+            setTimeout(resolve, 400); // Wartet bis die Fade-Out Animation beendet ist
         });
     }
 
@@ -164,26 +157,26 @@ class SecretSocietyTransition {
         });
     }
 
-    revealSections() {
+    fadeInNewPage() {
         const main = document.querySelector('main');
         main.classList.remove('fade-out');
-        const reveals = document.querySelectorAll('.reveal');
-        reveals.forEach((el, index) => {
-            setTimeout(() => {
-                if (el.getBoundingClientRect().top < window.innerHeight) {
-                    el.classList.add('revealed');
-                }
-            }, index * 100);
-        });
+        main.classList.add('fade-in');
+
+        // Initialisiert die "reveal" Animationen für die neue Seite
+        revealOnScroll();
+
+        setTimeout(() => {
+            main.classList.remove('fade-in');
+        }, 300);
     }
 
     async loadPage(url) {
         const response = await fetch(url);
-        if (!response.ok) throw new Error('Page not found');
+        if (!response.ok) throw new Error(`Page not found: ${url}`);
         return await response.text();
     }
 
-    replacePageContent(html) {
+    replacePageContent(html, url) {
         const parser = new DOMParser();
         const newDoc = parser.parseFromString(html, 'text/html');
 
@@ -191,27 +184,33 @@ class SecretSocietyTransition {
 
         const newMain = newDoc.querySelector('main');
         const currentMain = document.querySelector('main');
-        currentMain.innerHTML = newMain.innerHTML;
 
-        this.updateActiveNavLink();
-        this.handleContentSpecificInitials(window.location.href);
+        if (newMain && currentMain) {
+            currentMain.innerHTML = newMain.innerHTML;
+        }
+
+        this.updateActiveNavLink(url);
+        this.handleContentSpecificInitials(url);
     }
 
-    updateActiveNavLink() {
+    updateActiveNavLink(url) {
         const navLinks = document.querySelectorAll('nav a');
-        const current = window.location.pathname.split('/').pop() || 'index.html';
+        const currentPath = new URL(url).pathname;
 
         navLinks.forEach(link => {
-            link.removeAttribute('aria-current');
-            if (link.getAttribute('href') === current) {
+            const linkPath = new URL(link.href).pathname;
+            if (linkPath === currentPath || (linkPath.endsWith('index.html') && currentPath === '/')) {
                 link.setAttribute('aria-current', 'page');
+            } else {
+                link.removeAttribute('aria-current');
             }
         });
     }
 
     handleContentSpecificInitials(url) {
-        const path = url.split('/').pop() || 'index.html';
-        if (path === 'index.html') {
+        const path = new URL(url).pathname.split('/').pop() || 'index.html';
+
+        if (path === 'index.html' || path === '') {
             if (window.countdownInstance) {
                 clearInterval(window.countdownInstance.countdownInterval);
             }
@@ -245,8 +244,8 @@ class Countdown {
         const distance = this.targetDate - now;
 
         if (distance < 0) {
-            this.timerElement.innerHTML = 'PROJEKT GESTARTET!';
-            this.messageElement.textContent = 'Das Warten hat ein Ende! Tauchen Sie ein in die Simulation.';
+            if (this.timerElement) this.timerElement.innerHTML = 'PROJEKT GESTARTET!';
+            if (this.messageElement) this.messageElement.textContent = 'Das Warten hat ein Ende! Tauchen Sie ein in die Simulation.';
             clearInterval(this.countdownInterval);
             return;
         }
@@ -256,11 +255,13 @@ class Countdown {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        this.timerElement.querySelector('#days').textContent = days;
-        this.timerElement.querySelector('#hours').textContent = hours;
-        this.timerElement.querySelector('#minutes').textContent = minutes;
-        this.timerElement.querySelector('#seconds').textContent = seconds;
-        this.messageElement.textContent = 'Die Zeit läuft...';
+        if (this.timerElement && this.timerElement.querySelector('#days')) {
+            this.timerElement.querySelector('#days').textContent = days;
+            this.timerElement.querySelector('#hours').textContent = hours;
+            this.timerElement.querySelector('#minutes').textContent = minutes;
+            this.timerElement.querySelector('#seconds').textContent = seconds;
+            if (this.messageElement) this.messageElement.textContent = 'Die Zeit läuft...';
+        }
     }
 }
 
@@ -270,7 +271,7 @@ function revealOnScroll() {
 
     reveals.forEach(el => {
         const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
+        if (elementTop < windowHeight - 50) {
             el.classList.add('revealed');
         }
     });
@@ -283,15 +284,18 @@ function throttledReveal() {
         scrollTimeout = setTimeout(() => {
             revealOnScroll();
             scrollTimeout = null;
-        }, 16);
+        }, 50);
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const secretTransition = new SecretSocietyTransition();
-    if (window.location.pathname.split('/').pop() === 'index.html' || window.location.pathname === '/') {
+    new SecretSocietyTransition();
+
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    if (path === 'index.html' || path === '') {
         window.countdownInstance = new Countdown('2026-03-01T00:00:00', 'countdown-timer', 'countdown-message');
     }
+
     revealOnScroll();
 
     const navLinks = document.querySelectorAll('nav a');
@@ -304,3 +308,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('scroll', throttledReveal, {passive: true});
+
+function setupMobileMenu() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('nav a');
+
+    if (navToggle && nav) {
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('nav-open');
+            navToggle.classList.toggle('nav-open'); // Für die "X"-Animation
+        });
+    }
+
+    // Menü schließen, wenn ein Link geklickt wird
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('nav-open')) {
+                nav.classList.remove('nav-open');
+                navToggle.classList.remove('nav-open');
+            }
+        });
+    });
+}
+
+// Event Listener, um das mobile Menü zu initialisieren
+document.addEventListener('DOMContentLoaded', setupMobileMenu);
