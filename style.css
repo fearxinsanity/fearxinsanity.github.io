@@ -295,3 +295,16 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent);
 }
+
+/* Logo im Header - Oben Rechts */
+.header-logo {
+    position: absolute; /* Positioniert das Logo relativ zum Header */
+    top: 20px; /* Abstand vom oberen Rand */
+    right: 20px; /* Abstand vom rechten Rand */
+    max-width: 80px; /* Etwas kleiner für eine bessere Passform in der Ecke */
+    height: auto;
+    border: 2px solid var(--primary);
+    padding: 5px;
+    background-color: var(--secondary);
+    box-shadow: 0 0 10px var(--shadow);
+}
