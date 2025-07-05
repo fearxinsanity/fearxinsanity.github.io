@@ -12,7 +12,7 @@ class SecretSocietyTransition {
         overlay.id = 'eye-overlay';
         overlay.innerHTML = `
             <div class="eye-container">
-                <div class="eye"></div>
+                <img src="Bilder/Logo-Illuminati_Freimarurer-Mix.PNG" alt="Projekt Logo" class="eye-image">
             </div>
         `;
         document.body.appendChild(overlay);
@@ -41,33 +41,25 @@ class SecretSocietyTransition {
             }
 
             .eye-container {
-                width: 150px;
-                height: 150px;
+                width: 150px; /* Oder die gewünschte Größe für dein Logo */
+                height: 150px; /* Oder die gewünschte Größe für dein Logo */
                 position: relative;
                 animation: pulse 2s infinite;
+                display: flex; /* Zentriert das Bild innerhalb des Containers */
+                justify-content: center;
+                align-items: center;
+                overflow: hidden; /* **WICHTIG:** Schneidet den Inhalt außerhalb des Kreises ab */
+                border-radius: 50%; /* **WICHTIG:** Macht den Container kreisförmig */
             }
 
-            .eye {
-                width: 100%;
-                height: 100%;
-                background: var(--primary);
-                border-radius: 50%;
-                position: relative;
-                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-                transform: rotate(180deg);
-            }
-            
-            .eye::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 50px;
-                height: 50px;
-                background: var(--secondary);
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-                border: 2px solid var(--primary);
+            .eye-image {
+                width: 100%; /* Bild nimmt die volle Breite des Containers ein */
+                height: 100%; /* Bild nimmt die volle Höhe des Containers ein */
+                object-fit: cover; /* **WICHTIG:** Füllt den Kreis aus, kann aber Teile des Bildes abschneiden */
+                border: 2px solid var(--primary); /* Optional: Rahmen um das Bild */
+                border-radius: 50%; /* Macht das Bild selbst auch kreisförmig */
+                box-shadow: 0 0 10px var(--primary); /* Optional: Schatteneffekt */
+                background-color: var(--secondary); /* Hintergrundfarbe für das Logo, falls es transparente Bereiche hat */
             }
 
             @keyframes pulse {
