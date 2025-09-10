@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const path = window.location.pathname.split('/').pop() || 'index.html';
     if (path === 'index.html' || path === '') {
-        window.countdownInstance = new Countdown('2026-03-01T00:00:00', 'countdown-timer', 'countdown-message');
+        window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
     }
 
     revealOnScroll();
