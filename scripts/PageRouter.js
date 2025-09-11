@@ -1,4 +1,5 @@
 import { Countdown } from './Countdown.js';
+import { revealOnScroll, setupMobileMenu } from './Utils.js';
 
 export class PageRouter {
     constructor(animator) {
@@ -47,6 +48,10 @@ export class PageRouter {
             }
 
             this.handleContentSpecificInitials(url);
+
+            // Wichtiger Fix: Initialisiere alle dynamischen Funktionen für die neue Seite
+            revealOnScroll();
+            setupMobileMenu();
 
             await this.animator.hideOverlay();
             await this.animator.fadeInContent();
