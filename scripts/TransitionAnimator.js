@@ -1,3 +1,5 @@
+// scripts/TransitionAnimator.js
+
 export class TransitionAnimator {
     constructor() {
         this.eyeOverlay = document.getElementById('eye-overlay');
@@ -10,7 +12,15 @@ export class TransitionAnimator {
                 element.removeEventListener('transitionend', onTransitionEnd);
                 resolve();
             };
+
+            // Fange das transitionend-Event ab
             element.addEventListener('transitionend', onTransitionEnd);
+
+            // Optionaler Fallback: Bricht nach 500ms ab und setzt fort
+            setTimeout(() => {
+                element.removeEventListener('transitionend', onTransitionEnd);
+                resolve();
+            }, 500);
         });
     }
 
