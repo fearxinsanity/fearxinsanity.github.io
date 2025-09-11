@@ -15,7 +15,10 @@ function throttledReveal() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const animator = new TransitionAnimator();
-    new PageRouter(animator);
+    const router = new PageRouter(animator); // Referenz speichern
+
+    // Zusätzlicher Aufruf, um den Countdown auf dem ersten Seitenaufruf zu initialisieren
+    router.handleContentSpecificInitials(window.location.href);
 
     revealOnScroll();
     setupMobileMenu();
