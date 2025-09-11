@@ -15,9 +15,8 @@ function throttledReveal() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const animator = new TransitionAnimator();
-    const router = new PageRouter(animator); // Referenz speichern
+    const router = new PageRouter(animator);
 
-    // Zusätzlicher Aufruf, um den Countdown auf dem ersten Seitenaufruf zu initialisieren
     router.handleContentSpecificInitials(window.location.href);
 
     revealOnScroll();
