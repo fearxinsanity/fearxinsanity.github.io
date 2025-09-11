@@ -1,6 +1,6 @@
 import { PageRouter } from './PageRouter.js';
 import { TransitionAnimator } from './TransitionAnimator.js';
-import { revealOnScroll, setupMobileMenu } from './utils.js';
+import { revealOnScroll, setupMobileMenu } from './Utils.js';
 
 let scrollTimeout;
 
