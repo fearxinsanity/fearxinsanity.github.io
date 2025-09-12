@@ -399,13 +399,13 @@ footer {
     position: absolute;
     top: 20px;
     right: 20px;
-    max-width: 60px; /* Logo-Größe reduziert */
+    max-width: 80px; /* Logo-Größe angepasst, um besser sichtbar zu sein */
     height: auto;
     border: 2px solid var(--primary);
-    padding: 0; /* Padding für runde Form entfernt */
+    padding: 0;
     background-color: var(--secondary);
     box-shadow: 0 0 10px var(--shadow);
-    border-radius: 50%; /* Macht das Element perfekt rund */
+    border-radius: 50%;
 }
 
 /* Eye Overlay Animation */
