@@ -85,9 +85,10 @@ nav a {
 nav a:hover,
 nav a:focus,
 nav a[aria-current="page"] {
-    background: var(--nav-link);
-    color: var(--secondary);
-    box-shadow: 0 0 15px var(--primary);
+    background: var(--nav-link-active); /* Ändert den Hintergrund auf den Akzentfarbton */
+    color: var(--white);
+    box-shadow: 0 0 15px var(--accent); /* Ein Glühen, das zum Akzent passt */
+    transform: scale(1.05); /* Skaliert den Link leicht */
 }
 
 /* Hauptbereich */
@@ -179,6 +180,12 @@ section a:hover {
     background: var(--accent);
     padding: 5px;
     box-shadow: 0 0 10px var(--shadow);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.galerie-container img:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 5px 25px var(--shadow);
 }
 
 /* Countdown Styling */
@@ -511,4 +518,11 @@ button[type="submit"]:hover {
     background: var(--accent);
     color: var(--white);
     box-shadow: 0 0 15px var(--accent);
+}
+
+/* Glüheffekt für Überschriften */
+section h2:hover,
+section h3:hover {
+    text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+    transition: text-shadow 0.3s ease-in-out;
 }
