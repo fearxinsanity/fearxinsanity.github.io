@@ -30,6 +30,8 @@ export function setupMobileMenu() {
 
     if (navToggle && nav) {
         navToggle.addEventListener('click', () => {
+            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', `${!isExpanded}`);
             nav.classList.toggle('nav-open');
             navToggle.classList.toggle('nav-open');
         });
@@ -38,6 +40,8 @@ export function setupMobileMenu() {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (nav.classList.contains('nav-open')) {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', `${!isExpanded}`);
                 nav.classList.remove('nav-open');
                 navToggle.classList.remove('nav-open');
             }

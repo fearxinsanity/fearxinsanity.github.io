@@ -17,7 +17,6 @@ export class TransitionAnimator {
 
     /**
      * Erstellt ein Promise, das auflöst, wenn eine CSS-Transition abgeschlossen ist.
-     * Beinhaltet einen Fallback-Timeout.
      * @param {HTMLElement} element - Das Element, dessen Transition überwacht werden soll.
      * @returns {Promise<void>}
      */
@@ -27,15 +26,7 @@ export class TransitionAnimator {
                 element.removeEventListener('transitionend', onTransitionEnd);
                 resolve();
             };
-
-            // Fange das transitionend-Event ab
             element.addEventListener('transitionend', onTransitionEnd);
-
-            // Optionaler Fallback: Bricht nach 500ms ab und setzt fort
-            setTimeout(() => {
-                element.removeEventListener('transitionend', onTransitionEnd);
-                resolve();
-            }, 500);
         });
     }
 
