@@ -101,10 +101,12 @@ export class PageRouter {
     handleContentSpecificInitials(url) {
         const path = new URL(url).pathname.split('/').pop() || 'index.html';
         if (path === 'index.html' || path === '') {
-            if (window.countdownInstance) {
-                clearInterval(window.countdownInstance.countdownInterval);
+            if (!window.countdownInstance || window.countdownInstance.countdownInterval === null) {
+                if (window.countdownInstance) {
+                    clearInterval(window.countdownInstance.countdownInterval);
+                }
+                window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
             }
-            window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
         }
     }
 }
