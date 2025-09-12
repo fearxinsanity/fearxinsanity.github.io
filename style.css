@@ -526,3 +526,31 @@ section h3:hover {
     text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
     transition: text-shadow 0.3s ease-in-out;
 }
+
+/* Dynamische Header-Anpassungen */
+header.is-scrolling {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 40px);
+    z-index: 999;
+    padding: 10px 0;
+    margin: 20px;
+    border-width: 1px;
+    transition: all 0.3s ease-in-out;
+}
+
+header.is-scrolling h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+header.is-scrolling p {
+    display: none;
+}
+
+header.is-scrolling .header-logo {
+    top: 5px;
+    right: 5px;
+    max-width: 60px;
+}
