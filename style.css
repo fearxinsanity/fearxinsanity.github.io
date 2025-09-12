@@ -30,7 +30,8 @@ html, body {
 /* Header */
 header {
     background: var(--secondary);
-    border: 2px solid var(--primary);
+    border: 0;
+    border-bottom: 2px solid var(--primary);
     border-radius: 0;
     padding: 40px 0;
     text-align: center;
@@ -40,7 +41,7 @@ header {
 }
 
 header h1 {
-    margin: 0 0 16px 0;
+    margin: 0 0 8px 0;
     font-family: 'Cinzel', serif;
     font-size: 32px;
     color: var(--primary);
@@ -55,6 +56,7 @@ header p {
     font-size: 14px;
     letter-spacing: 2px;
     font-style: italic;
+    font-variant: small-caps;
 }
 
 /* Navigation */
@@ -64,7 +66,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -73,8 +75,8 @@ nav a {
     color: var(--nav-link);
     font-family: 'Cinzel', serif;
     font-size: 16px;
-    padding: 10px 20px;
-    border: 1px solid var(--nav-link);
+    padding: 10px 15px;
+    border: 1px solid transparent;
     background: transparent;
     transition: all 0.3s ease-in-out;
     text-transform: uppercase;
@@ -83,12 +85,17 @@ nav a {
 }
 
 nav a:hover,
-nav a:focus,
+nav a:focus {
+    color: var(--accent);
+    box-shadow: 0 0 10px var(--primary);
+}
+
 nav a[aria-current="page"] {
-    background: var(--nav-link-active); /* Ändert den Hintergrund auf den Akzentfarbton */
-    color: var(--white);
-    box-shadow: 0 0 15px var(--accent); /* Ein Glühen, das zum Akzent passt */
-    transform: scale(1.05); /* Skaliert den Link leicht */
+    border-bottom: 1px solid var(--primary);
+    color: var(--primary);
+    box-shadow: none;
+    transform: none;
+    background: transparent;
 }
 
 /* Hauptbereich */
@@ -257,28 +264,29 @@ footer {
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        position: relative; /* Wichtig für die Positionierung von Kind-Elementen */
+        position: relative;
+        background: rgba(10, 10, 10, 0.9);
+        border: none;
+        border-bottom: 2px solid var(--primary);
     }
 
-    /* Der Untertitel wird auf Mobilgeräten ausgeblendet, um Platz zu schaffen */
     header p {
         display: none;
     }
 
     header h1 {
         font-size: 18px;
-        order: 2; /* Der Titel kommt in der Mitte */
-        width: 100%; /* Nimmt die volle Breite ein */
+        order: 2;
+        width: 100%;
         text-align: center;
         margin: 10px 0 0 0;
-        padding: 0 30px; /* Fügt links und rechts etwas Abstand hinzu, um nicht mit Buttons zu kollidieren */
+        padding: 0 30px;
     }
 
     header .header-logo {
-        display: none; /* Blendet das Logo auf Mobilgeräten komplett aus */
+        display: none;
     }
 
-    /* Navigation als ausklappbares Menü */
     nav {
         position: fixed;
         top: 0;
@@ -286,7 +294,7 @@ footer {
         width: 100%;
         height: 100%;
         background: rgba(10, 10, 10, 0.95);
-        transform: translateX(-100%); /* Startet außerhalb des Bildschirms */
+        transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         z-index: 1000;
         display: flex;
@@ -295,7 +303,7 @@ footer {
     }
 
     nav.nav-open {
-        transform: translateX(0); /* Fährt ins Bild */
+        transform: translateX(0);
     }
 
     nav ul {
@@ -315,9 +323,10 @@ footer {
         color: var(--accent);
         background: none;
         box-shadow: none;
+        border: none;
+        transform: none;
     }
 
-    /* Hamburger Menü Button */
     .nav-toggle {
         display: block;
         order: 3;
@@ -325,8 +334,8 @@ footer {
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 15px; /* Vergrößert die Klickzone */
-        position: relative; /* Stellt sicher, dass z-index funktioniert */
+        padding: 15px;
+        position: relative;
     }
 
     .hamburger {
@@ -357,9 +366,8 @@ footer {
         bottom: -8px;
     }
 
-    /* Hamburger zu "X" umwandeln, wenn Menü offen ist */
     .nav-open .nav-toggle .hamburger {
-        background: transparent; /* Mittlerer Strich verschwindet */
+        background: transparent;
     }
 
     .nav-open .nav-toggle .hamburger::before {
@@ -406,8 +414,8 @@ footer {
 .header-logo {
     position: absolute;
     top: 20px;
-    right: 20px;
-    max-width: 100px; /* Logo-Größe für bessere Sichtbarkeit angepasst */
+    left: 20px;
+    max-width: 100px;
     height: auto;
     border: 2px solid var(--primary);
     padding: 0;
@@ -423,7 +431,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 10, 0.95); /* Semi-transparenter schwarzer Hintergrund */
+    background: rgba(10, 10, 10, 0.95);
     display: flex;
     justify-content: center;
     align-items: center;
