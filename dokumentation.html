@@ -35,27 +35,20 @@
     <section class="reveal">
         <h2>Projektdokumentation</h2>
         <p>
-            Hier finden Sie detaillierte Informationen zur Funktionsweise der Simulation, den verwendeten Modellen und
-            Algorithmen.
+            Das Projekt „Das unberechenbare Volk“ ist ein interaktiver Wahl-Simulator zur Visualisierung von Wahldynamiken. Die Anwendung wird als Windows-Anwendung mit einer grafischen Benutzeroberfläche (GUI) umgesetzt und soll die Unvorhersehbarkeit politischer Prozesse durch Zufallsereignisse modellieren.
         </p>
 
         <h3>Aufbau der Simulation</h3>
         <p>
-            (Hier kommt später der detaillierte Text über die Simulation, z.B. verwendete Parameter, Phasen der
-            Simulation, etc.)
+            Die Systemarchitektur folgt dem Model-View-Controller (MVC)-Design-Pattern. Dies trennt die Simulationslogik (`Model`) von der Benutzeroberfläche (`View`) und dem Vermittler (`Controller`). Der Datenfluss ist unidirektional: Nutzereingaben in der `View` werden vom `Controller` verarbeitet und an das `Model` weitergeleitet. Das `Model` führt die Simulation aus und der `Controller` aktualisiert die `View` mit den neuen Daten. Die Simulation ist zeitabhängig und läuft in diskreten Zeitschritten ab.
         </p>
 
         <h3>Genutzte Technologien</h3>
         <ul>
-            <li>Programmiersprache: [Deine Sprache, z.B. Python]</li>
-            <li>Frameworks/Bibliotheken: [Deine Frameworks/Bibliotheken, z.B. NumPy, Matplotlib]</li>
-            <li>...</li>
+            <li>Programmiersprache: Java SE</li>
+            <li>Frameworks/Bibliotheken: JavaFX für das UI und Maven zur Abhängigkeitsverwaltung.</li>
+            <li>Java Development Kit (JDK): JDK 21.</li>
         </ul>
-
-        <h3>Ergebnisse und Analysen</h3>
-        <p>
-            (Hier kannst du erste Ergebnisse, Hypothesen oder Erkenntnisse aus der Simulation vorstellen.)
-        </p>
     </section>
 </main>
 
