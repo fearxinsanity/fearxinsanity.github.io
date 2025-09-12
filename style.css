@@ -455,3 +455,60 @@ footer {
 body.no-scroll {
     overflow: hidden;
 }
+
+/* Formular-Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+label {
+    font-family: 'Cinzel', serif;
+    color: var(--primary);
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+input[type="email"],
+textarea {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 10px;
+    font-size: 14px;
+    font-family: 'Lora', serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="email"]:focus,
+textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background: var(--primary);
+    color: var(--secondary);
+    border: 2px solid var(--primary);
+    padding: 12px 25px;
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 0 15px var(--accent);
+}
