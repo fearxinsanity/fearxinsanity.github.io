@@ -34,6 +34,7 @@ export function setupMobileMenu() {
             navToggle.setAttribute('aria-expanded', `${!isExpanded}`);
             nav.classList.toggle('nav-open');
             navToggle.classList.toggle('nav-open');
+            document.body.classList.toggle('no-scroll');
         });
     }
 
@@ -44,6 +45,7 @@ export function setupMobileMenu() {
                 navToggle.setAttribute('aria-expanded', `${!isExpanded}`);
                 nav.classList.remove('nav-open');
                 navToggle.classList.remove('nav-open');
+                document.body.classList.remove('no-scroll');
             }
         });
     });
