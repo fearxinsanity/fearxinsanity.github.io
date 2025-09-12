@@ -1,4 +1,18 @@
+/**
+ * @file Countdown.js
+ * @description Stellt einen Countdown-Timer für ein bestimmtes Zieldatum bereit.
+ */
+
+/**
+ * Klasse zur Verwaltung und Anzeige eines Countdowns.
+ */
 export class Countdown {
+    /**
+     * Erstellt eine Instanz des Countdowns.
+     * @param {string} targetDateString - Das Zieldatum im Format "YYYY-MM-DDT-HH:MM:SS".
+     * @param {string} timerElementId - Die ID des HTML-Elements, das den Timer anzeigt.
+     * @param {string} messageElementId - Die ID des HTML-Elements, das eine Nachricht anzeigt.
+     */
     constructor(targetDateString, timerElementId, messageElementId) {
         this.targetDate = new Date(targetDateString).getTime();
         this.timerElement = document.getElementById(timerElementId);
@@ -10,6 +24,10 @@ export class Countdown {
         }
     }
 
+    /**
+     * Startet oder aktualisiert den Countdown-Timer.
+     * Stoppt jeden zuvor gestarteten Interval, um Doppelung zu verhindern.
+     */
     startCountdown() {
         this.updateCountdown();
         if (this.countdownInterval) {
@@ -18,6 +36,11 @@ export class Countdown {
         this.countdownInterval = setInterval(() => this.updateCountdown(), 1000);
     }
 
+    /**
+     * Aktualisiert die Anzeige des Countdowns jede Sekunde.
+     * Berechnet die verbleibende Zeit und zeigt sie in den entsprechenden HTML-Elementen an.
+     * Stoppt den Timer, wenn das Zieldatum erreicht ist.
+     */
     updateCountdown() {
         const now = new Date().getTime();
         const distance = this.targetDate - now;

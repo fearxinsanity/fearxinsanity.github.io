@@ -1,11 +1,26 @@
-// scripts/TransitionAnimator.js
+/**
+ * @file TransitionAnimator.js
+ * @description Verwaltet die Übergangsanimationen wie das Ein- und Ausblenden des Augen-Overlays.
+ */
 
+/**
+ * Klasse zur Steuerung der Seitenübergangsanimationen.
+ */
 export class TransitionAnimator {
+    /**
+     * Erstellt eine Instanz des TransitionAnimators und holt die relevanten DOM-Elemente.
+     */
     constructor() {
         this.eyeOverlay = document.getElementById('eye-overlay');
         this.mainContent = document.querySelector('main');
     }
 
+    /**
+     * Erstellt ein Promise, das auflöst, wenn eine CSS-Transition abgeschlossen ist.
+     * Beinhaltet einen Fallback-Timeout.
+     * @param {HTMLElement} element - Das Element, dessen Transition überwacht werden soll.
+     * @returns {Promise<void>}
+     */
     waitForTransition(element) {
         return new Promise(resolve => {
             const onTransitionEnd = () => {
@@ -24,6 +39,10 @@ export class TransitionAnimator {
         });
     }
 
+    /**
+     * Zeigt das Augen-Overlay mit einer Animation an.
+     * @async
+     */
     async showOverlay() {
         if (this.eyeOverlay) {
             this.eyeOverlay.classList.add('active');
@@ -31,6 +50,10 @@ export class TransitionAnimator {
         }
     }
 
+    /**
+     * Blendet das Augen-Overlay mit einer Animation aus.
+     * @async
+     */
     async hideOverlay() {
         if (this.eyeOverlay) {
             this.eyeOverlay.classList.remove('active');
@@ -38,6 +61,10 @@ export class TransitionAnimator {
         }
     }
 
+    /**
+     * Blendet den Hauptinhalt der Seite aus.
+     * @async
+     */
     async fadeOutContent() {
         if (this.mainContent) {
             this.mainContent.classList.add('fade-out');
@@ -45,6 +72,10 @@ export class TransitionAnimator {
         }
     }
 
+    /**
+     * Blendet den Hauptinhalt der Seite ein.
+     * @async
+     */
     async fadeInContent() {
         if (this.mainContent) {
             this.mainContent.classList.remove('fade-out');
