@@ -40,13 +40,25 @@ header {
 
 .header-container {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto 1fr; /* This is the key change for true centering */
     align-items: center;
-    justify-content: space-between;
+    text-align: center;
+}
+
+.header-logo {
+    justify-self: start;
+    max-width: 150px;
+    height: auto;
+    border: 2px solid var(--primary);
+    padding: 0;
+    background-color: var(--secondary);
+    box-shadow: 0 0 10px var(--shadow);
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .header-text-container {
-    text-align: center;
+    justify-self: center;
     padding: 0 20px;
 }
 
@@ -70,6 +82,7 @@ header p {
 
 /* Navigation */
 nav {
+    justify-self: end;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto);
@@ -98,7 +111,7 @@ nav a {
     position: relative;
     color: var(--nav-link);
     border: 1px solid var(--nav-link);
-    display: block; /* Stellt sicher, dass das Padding funktioniert */
+    display: block; /* Ensures padding works correctly */
 }
 
 nav a:hover,
