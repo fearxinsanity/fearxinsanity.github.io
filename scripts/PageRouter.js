@@ -112,13 +112,16 @@ export class PageRouter {
         const parser = new DOMParser();
         const newDoc = parser.parseFromString(html, 'text/html');
 
-        document.title = newDoc.title;
         const newMain = newDoc.querySelector('main');
         const currentMain = document.querySelector('main');
 
-        if (newMain && currentMain) {
-            currentMain.innerHTML = newMain.innerHTML;
+        // Zusätzliche Fehlerprüfung: Wenn kein <main>-Element gefunden wird, wird eine Fehlermeldung ausgelöst.
+        if (!newMain || !currentMain) {
+            throw new Error('Could not find <main> element in the new page content.');
         }
+
+        document.title = newDoc.title;
+        currentMain.innerHTML = newMain.innerHTML;
     }
 
     /**
