@@ -396,15 +396,16 @@ footer {
 
 /* Logo im Header - Oben Rechts */
 .header-logo {
-    position: absolute; /* Positioniert das Logo relativ zum Header */
-    top: 20px; /* Abstand vom oberen Rand */
-    right: 20px; /* Abstand vom rechten Rand */
-    max-width: 80px; /* Etwas kleiner für eine bessere Passform in der Ecke */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    max-width: 60px; /* Logo-Größe reduziert */
     height: auto;
     border: 2px solid var(--primary);
-    padding: 5px;
+    padding: 0; /* Padding für runde Form entfernt */
     background-color: var(--secondary);
     box-shadow: 0 0 10px var(--shadow);
+    border-radius: 50%; /* Macht das Element perfekt rund */
 }
 
 /* Eye Overlay Animation */
