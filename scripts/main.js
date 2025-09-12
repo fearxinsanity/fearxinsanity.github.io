@@ -19,22 +19,9 @@ function handleScroll() {
     if (!scrollTicking) {
         window.requestAnimationFrame(() => {
             revealOnScroll();
-            checkHeaderScroll(); // Neu hinzugefügt
             scrollTicking = false;
         });
         scrollTicking = true;
-    }
-}
-
-/**
- * Überprüft die Scroll-Position und passt den Header an.
- */
-function checkHeaderScroll() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.classList.add('is-scrolling');
-    } else {
-        header.classList.remove('is-scrolling');
     }
 }
 
@@ -47,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialisiert die Animationen beim ersten Laden der Seite
     revealOnScroll();
     setupMobileMenu();
-    checkHeaderScroll(); // Führt die Prüfung beim Laden aus
 });
 
 // Fügt den Event-Listener für das gesperrte Scroll-Event hinzu
@@ -57,7 +43,6 @@ window.addEventListener('scroll', handleScroll, { passive: true });
 document.addEventListener('pageLoaded', () => {
     revealOnScroll();
     setupMobileMenu();
-    checkHeaderScroll(); // Führt die Prüfung nach dem Laden einer neuen Seite aus
 });
 
 // Aktualisiert dynamisch die Jahreszahl im Footer
