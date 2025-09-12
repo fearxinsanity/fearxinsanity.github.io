@@ -429,3 +429,8 @@ footer {
     opacity: 1;
     visibility: visible;
 }
+
+.eye-image {
+    max-width: 150px;
+    border-radius: 50%;
+}
