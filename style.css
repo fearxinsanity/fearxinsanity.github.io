@@ -32,27 +32,44 @@ header {
     background: var(--secondary);
     border: 2px solid var(--primary);
     border-radius: 0;
-    padding: 40px 0;
-    text-align: center;
+    padding: 20px 0;
     margin: 20px;
     position: relative;
     box-shadow: 0 0 20px var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.header-text-container {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    margin: 0 0 16px 0;
+    margin: 0;
     font-family: 'Cinzel', serif;
-    font-size: 32px;
+    font-size: 3rem; /* Größerer Titel */
     color: var(--primary);
     text-shadow: 2px 2px 5px var(--shadow);
-    letter-spacing: 4px;
+    letter-spacing: 1px; /* Etwas mehr Buchstabenabstand */
     font-weight: 700;
 }
 
 header p {
-    margin: 0 0 20px 0;
-    color: var(--text-secondary);
-    font-size: 14px;
+    margin: 0;
+    color: rgba(192, 160, 98, 0.7); /* Helleres, graues Gold */
+    font-size: 1.2rem; /* Kleinerer Untertitel */
     letter-spacing: 2px;
     font-style: italic;
 }
@@ -64,7 +81,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px; /* Mehr Abstand zwischen den Links */
     flex-wrap: wrap;
 }
 
@@ -73,7 +90,7 @@ nav a {
     color: var(--nav-link);
     font-family: 'Cinzel', serif;
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 15px 25px; /* Größerer Innenabstand */
     border: 1px solid var(--nav-link);
     background: transparent;
     transition: all 0.3s ease-in-out;
@@ -253,11 +270,7 @@ footer {
     header {
         margin: 10px;
         padding: 15px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        position: relative; /* Wichtig für die Positionierung von Kind-Elementen */
+        flex-direction: column;
     }
 
     /* Der Untertitel wird auf Mobilgeräten ausgeblendet, um Platz zu schaffen */
@@ -266,16 +279,16 @@ footer {
     }
 
     header h1 {
-        font-size: 18px;
-        order: 2; /* Der Titel kommt in der Mitte */
-        width: 100%; /* Nimmt die volle Breite ein */
+        font-size: 1.8rem;
+        order: 2;
+        width: 100%;
         text-align: center;
         margin: 10px 0 0 0;
-        padding: 0 30px; /* Fügt links und rechts etwas Abstand hinzu, um nicht mit Buttons zu kollidieren */
+        padding: 0 30px;
     }
 
     header .header-logo {
-        display: none; /* Blendet das Logo auf Mobilgeräten komplett aus */
+        display: none;
     }
 
     /* Navigation als ausklappbares Menü */
@@ -286,7 +299,7 @@ footer {
         width: 100%;
         height: 100%;
         background: rgba(10, 10, 10, 0.95);
-        transform: translateX(-100%); /* Startet außerhalb des Bildschirms */
+        transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         z-index: 1000;
         display: flex;
@@ -295,7 +308,7 @@ footer {
     }
 
     nav.nav-open {
-        transform: translateX(0); /* Fährt ins Bild */
+        transform: translateX(0);
     }
 
     nav ul {
@@ -325,8 +338,8 @@ footer {
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 15px; /* Vergrößert die Klickzone */
-        position: relative; /* Stellt sicher, dass z-index funktioniert */
+        padding: 15px;
+        position: relative;
     }
 
     .hamburger {
@@ -359,7 +372,7 @@ footer {
 
     /* Hamburger zu "X" umwandeln, wenn Menü offen ist */
     .nav-open .nav-toggle .hamburger {
-        background: transparent; /* Mittlerer Strich verschwindet */
+        background: transparent;
     }
 
     .nav-open .nav-toggle .hamburger::before {
@@ -402,18 +415,25 @@ footer {
     background: var(--accent);
 }
 
-/* Logo im Header - Oben Rechts */
+/* Logo im Header */
 .header-logo {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    max-width: 100px; /* Logo-Größe für bessere Sichtbarkeit angepasst */
+    max-width: 150px;
     height: auto;
     border: 2px solid var(--primary);
     padding: 0;
     background-color: var(--secondary);
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 50%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Header Divider */
+.header-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--primary);
+    margin-top: 16px;
+    box-shadow: 0 0 10px var(--primary);
 }
 
 /* Eye Overlay Animation */
@@ -423,7 +443,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 10, 0.95); /* Semi-transparenter schwarzer Hintergrund */
+    background: rgba(10, 10, 10, 0.95);
     display: flex;
     justify-content: center;
     align-items: center;
