@@ -2,14 +2,15 @@ import { PageRouter } from './PageRouter.js';
 import { TransitionAnimator } from './TransitionAnimator.js';
 import { revealOnScroll, setupMobileMenu } from './Utils.js';
 
-let scrollTimeout;
+let scrollTicking = false;
 
-function throttledReveal() {
-    if (!scrollTimeout) {
-        scrollTimeout = setTimeout(() => {
+function handleScroll() {
+    if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
             revealOnScroll();
-            scrollTimeout = null;
-        }, 50);
+            scrollTicking = false;
+        });
+        scrollTicking = true;
     }
 }
 
@@ -23,4 +24,4 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
 });
 
-window.addEventListener('scroll', throttledReveal, { passive: true });
+window.addEventListener('scroll', handleScroll, { passive: true });
