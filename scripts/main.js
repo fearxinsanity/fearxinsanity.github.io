@@ -27,13 +27,18 @@ function handleScroll() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const animator = new TransitionAnimator();
-    const router = new PageRouter(animator);
+    window.router = new PageRouter(animator);
 
-    router.handleContentSpecificInitials(window.location.href);
+    // Aktualisiert dynamisch die Jahreszahl im Footer
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = `${new Date().getFullYear()}`;
+    }
 
     // Initialisiert die Animationen beim ersten Laden der Seite
     revealOnScroll();
     setupMobileMenu();
+    window.router.handleContentSpecificInitials(window.location.href);
 });
 
 // Fügt den Event-Listener für das gesperrte Scroll-Event hinzu
@@ -43,10 +48,5 @@ window.addEventListener('scroll', handleScroll, { passive: true });
 document.addEventListener('pageLoaded', () => {
     revealOnScroll();
     setupMobileMenu();
+    window.router.handleContentSpecificInitials(window.location.href);
 });
-
-// Aktualisiert dynamisch die Jahreszahl im Footer
-const currentYearSpan = document.getElementById('current-year');
-if (currentYearSpan) {
-    currentYearSpan.textContent = `${new Date().getFullYear()}`;
-}

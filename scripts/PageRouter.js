@@ -140,12 +140,22 @@ export class PageRouter {
      */
     handleContentSpecificInitials(url) {
         const path = new URL(url).pathname.split('/').pop() || 'index.html';
+        // Überprüft, ob die geladene Seite die Startseite ist.
         if (path === 'index.html' || path === '') {
-            if (!window.countdownInstance || window.countdownInstance.countdownInterval === null) {
+            const timerElement = document.getElementById('countdown-timer');
+            const messageElement = document.getElementById('countdown-message');
+            if (timerElement && messageElement) {
+                // Initialisiert den Countdown, falls die Elemente existieren.
                 if (window.countdownInstance) {
                     clearInterval(window.countdownInstance.countdownInterval);
                 }
                 window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
+            }
+        } else {
+            // Stoppt den Countdown, wenn zu einer anderen Seite navigiert wird.
+            if (window.countdownInstance) {
+                clearInterval(window.countdownInstance.countdownInterval);
+                window.countdownInstance = null;
             }
         }
     }
