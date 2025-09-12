@@ -44,3 +44,9 @@ document.addEventListener('pageLoaded', () => {
     revealOnScroll();
     setupMobileMenu();
 });
+
+// Aktualisiert dynamisch die Jahreszahl im Footer
+const currentYearSpan = document.getElementById('current-year');
+if (currentYearSpan) {
+    currentYearSpan.textContent = `${new Date().getFullYear()}`;
+}
