@@ -38,3 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fügt den Event-Listener für das gesperrte Scroll-Event hinzu
 window.addEventListener('scroll', handleScroll, { passive: true });
+
+// Neuer Event-Listener zur Initialisierung von dynamisch geladenen Seiten
+document.addEventListener('pageLoaded', () => {
+    revealOnScroll();
+    setupMobileMenu();
+});

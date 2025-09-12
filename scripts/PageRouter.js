@@ -4,7 +4,7 @@
  * Führt flüssige Seitenübergänge und asynchrone Inhalt-Nachladefunktionen aus.
  */
 import { Countdown } from './Countdown.js';
-import { revealOnScroll, setupMobileMenu } from './Utils.js';
+import { TransitionAnimator } from './TransitionAnimator.js';
 
 /**
  * Klasse für die Navigation zwischen statischen HTML-Seiten.
@@ -76,9 +76,8 @@ export class PageRouter {
 
             this.handleContentSpecificInitials(url);
 
-            // Wichtiger Fix: Initialisiere alle dynamischen Funktionen für die neue Seite
-            revealOnScroll();
-            setupMobileMenu();
+            // Wichtiger Fix: Signalisiere die neue Seite, um die Initialisierung zu starten
+            document.dispatchEvent(new CustomEvent('pageLoaded'));
 
             await this.animator.hideOverlay();
             await this.animator.fadeInContent();
@@ -86,7 +85,7 @@ export class PageRouter {
 
         } catch (error) {
             console.error('Transition failed:', error);
-            window.location.href = url;
+            this.handleTransitionError(url, error);
         } finally {
             this.isTransitioning = false;
         }
@@ -155,5 +154,27 @@ export class PageRouter {
                 window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
             }
         }
+    }
+
+    /**
+     * Zeigt eine Fehlermeldung und fällt auf einen Hard-Reload zurück.
+     * @param {string} url - Die URL, die nicht geladen werden konnte.
+     * @param {Error} error - Das aufgetretene Fehlerobjekt.
+     */
+    async handleTransitionError(url, error) {
+        const currentMain = document.querySelector('main');
+        if (currentMain) {
+            currentMain.innerHTML = `<section class="reveal">
+                <h2>Fehler beim Laden der Seite</h2>
+                <p>Die Seite konnte nicht geladen werden. Möglicherweise besteht ein Problem mit der Netzwerkverbindung. Wir leiten Sie automatisch weiter.</p>
+                <p>Fehlerdetails: ${error.message}</p>
+            </section>`;
+            this.animator.fadeInContent();
+        }
+
+        // Nach einer kurzen Pause zur Anzeige der Meldung, zum Hard-Reload wechseln
+        setTimeout(() => {
+            window.location.href = url;
+        }, 3000);
     }
 }
