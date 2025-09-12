@@ -29,18 +29,12 @@ export class PageRouter {
             const link = e.target.closest('a');
             if (link && this.isInternalLink(link.href)) {
                 e.preventDefault();
-                this.transitionTo(link.href)
-                    .catch(error => {
-                        console.error("Navigation-Promise abgelehnt:", error);
-                    });
+                this.transitionTo(link.href).catch(error => console.error('Transition failed:', error));
             }
         });
 
         window.addEventListener('popstate', () => {
-            this.transitionTo(window.location.href, false)
-                .catch(error => {
-                    console.error("Popstate-Promise abgelehnt:", error);
-                });
+            this.transitionTo(window.location.href, false).catch(error => console.error('Popstate transition failed:', error));
         });
     }
 
@@ -76,16 +70,14 @@ export class PageRouter {
 
             this.handleContentSpecificInitials(url);
 
-            // Wichtiger Fix: Signalisiere die neue Seite, um die Initialisierung zu starten
             document.dispatchEvent(new CustomEvent('pageLoaded'));
 
             await this.animator.hideOverlay();
             await this.animator.fadeInContent();
             this.updateActiveNavLink(url);
-
         } catch (error) {
-            console.error('Transition failed:', error);
-            this.handleTransitionError(url, error);
+            console.error('Transition failed, falling back to hard reload:', error);
+            window.location.href = url;
         } finally {
             this.isTransitioning = false;
         }
@@ -115,7 +107,6 @@ export class PageRouter {
         const newMain = newDoc.querySelector('main');
         const currentMain = document.querySelector('main');
 
-        // Zusätzliche Fehlerprüfung: Wenn kein <main>-Element gefunden wird, wird eine Fehlermeldung ausgelöst.
         if (!newMain || !currentMain) {
             throw new Error('Could not find <main> element in the new page content.');
         }
@@ -157,27 +148,5 @@ export class PageRouter {
                 window.countdownInstance = new Countdown('2026-06-02T00:00:00', 'countdown-timer', 'countdown-message');
             }
         }
-    }
-
-    /**
-     * Zeigt eine Fehlermeldung und fällt auf einen Hard-Reload zurück.
-     * @param {string} url - Die URL, die nicht geladen werden konnte.
-     * @param {Error} error - Das aufgetretene Fehlerobjekt.
-     */
-    async handleTransitionError(url, error) {
-        const currentMain = document.querySelector('main');
-        if (currentMain) {
-            currentMain.innerHTML = `<section class="reveal">
-                <h2>Fehler beim Laden der Seite</h2>
-                <p>Die Seite konnte nicht geladen werden. Möglicherweise besteht ein Problem mit der Netzwerkverbindung. Wir leiten Sie automatisch weiter.</p>
-                <p>Fehlerdetails: ${error.message}</p>
-            </section>`;
-            this.animator.fadeInContent();
-        }
-
-        // Nach einer kurzen Pause zur Anzeige der Meldung, zum Hard-Reload wechseln
-        setTimeout(() => {
-            window.location.href = url;
-        }, 3000);
     }
 }
