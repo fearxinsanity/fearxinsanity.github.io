@@ -305,7 +305,7 @@ footer {
     }
 
     .header-logo {
-        display: block; /* Logo bleibt sichtbar */
+        display: block;
         max-width: 100px;
     }
 
@@ -317,38 +317,42 @@ footer {
     nav {
         display: block;
         margin: 15px 0;
+        /* Verstecken der Navigation auf mobilen Geräten */
+        position: fixed;
+        top: 0;
+        left: -100%; /* Menü außerhalb des Bildschirms positionieren */
+        width: 75%; /* Menü nimmt 75% der Bildschirmbreite ein */
+        height: 100%;
+        background: var(--secondary);
+        z-index: 1000;
+        transition: left 0.5s ease-in-out;
+        box-shadow: 5px 0 15px var(--shadow);
+        overflow-y: auto;
     }
 
     nav.nav-open {
-        transform: translateX(0);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(10, 10, 10, 0.95);
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        left: 0; /* Menü in den sichtbaren Bereich schieben */
     }
 
     nav ul {
         flex-direction: column;
         gap: 25px;
-        padding: 0;
+        padding: 40px 20px;
+        display: flex; /* Flexbox-Layout für vertikale Anordnung */
+        text-align: left;
     }
 
     nav a {
-        font-size: 20px;
+        font-size: 18px;
         color: var(--primary);
-        padding: 10px 20px;
+        padding: 15px 20px;
         border: none;
+        border-bottom: 1px solid var(--border);
     }
 
-    nav a:hover, nav a:focus, nav a[aria-current="page"] {
+    nav a:hover, nav a:focus, nav a:active, nav a[aria-current="page"] {
         color: var(--accent);
-        background: none;
+        background: rgba(192, 160, 98, 0.1);
         box-shadow: none;
     }
 
