@@ -41,13 +41,14 @@ header {
 /* Desktop Header - Korrigiertes Grid-Layout für zentrale Überschrift */
 .header-container {
     display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Zentriert den mittleren Bereich perfekt */
+    grid-template-columns: auto 1fr auto; /* Neue Spaltenstruktur */
     align-items: center;
     text-align: center;
-    gap: 20px;
+    gap: 20px; /* Abstand zwischen den Elementen */
 }
 
 .header-logo {
+    justify-self: start;
     max-width: 150px;
     height: auto;
     border: 2px solid var(--primary);
@@ -56,10 +57,12 @@ header {
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 50%;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    grid-column: 1; /* Positioniert das Logo in der ersten Spalte */
 }
 
 .header-text-container {
     padding: 0 20px;
+    grid-column: 2; /* Positioniert die Überschrift in der zweiten, zentrierten Spalte */
 }
 
 header h1 {
@@ -82,6 +85,7 @@ header p {
 
 /* Navigation - Desktop-Optimierung */
 nav {
+    grid-column: 3; /* Positioniert die Navigation in der dritten Spalte */
     justify-self: end;
 }
 
@@ -89,8 +93,8 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    gap: 15px;
+    display: flex; /* Wechsel auf Flexbox */
+    gap: 15px; /* Fügt Abstand zwischen den Links hinzu */
 }
 
 nav li {
@@ -310,7 +314,7 @@ footer {
     }
 
     .header-logo {
-        max-width: 60px;
+        max-width: 60px; /* Reduziert die Größe des Logos */
         height: auto;
     }
 
