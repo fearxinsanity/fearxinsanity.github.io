@@ -422,6 +422,23 @@ footer {
         max-width: 90%; /* Responsiv für mobile Ansicht */
         height: auto;
     }
+
+    #countdown-timer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Fügt Abstand zwischen den gestapelten Elementen hinzu */
+    }
+
+    #countdown-timer span {
+        font-size: 1.5rem; /* Vergrößert die Zahl für bessere Lesbarkeit */
+        text-align: center;
+        min-width: unset; /* Entfernt die Mindestbreite */
+    }
+
+    #countdown-timer br {
+        display: none; /* Entfernt die Zeilenumbrüche für dieses Layout */
+    }
 }
 
 @media (min-width: 701px) {
