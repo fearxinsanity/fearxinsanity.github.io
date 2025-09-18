@@ -225,8 +225,11 @@ section a:hover {
     box-shadow: 0 5px 25px var(--shadow);
 }
 
-/* Countdown Styling */
+/* Countdown Styling - Desktop (neu) */
 #countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     font-family: 'Cinzel', serif;
     font-size: 20px;
     color: var(--accent);
@@ -236,11 +239,21 @@ section a:hover {
     letter-spacing: 2px;
 }
 
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #countdown-timer span {
-    display: inline-block;
-    min-width: 40px;
-    text-align: right;
-    padding: 5px 0;
+    font-size: 2rem;
+    text-align: center;
+    min-width: unset;
+}
+
+#countdown-timer label {
+    font-size: 1rem;
+    text-transform: uppercase;
 }
 
 .countdown-message {
@@ -278,30 +291,16 @@ footer {
     transform: none;
 }
 
-
 /* Responsive Design */
 @media (max-width: 700px) {
     html, body {
         font-size: 14px;
     }
 
-    header h1 {
-        font-size: 1.5rem; /* Angepasste Größe für mobile H1 */
-    }
-
-    header p {
-        font-size: 1rem; /* Angepasste Größe für mobile P */
-    }
-
+    /* Verbesserungen für den mobilen Header */
     header {
         margin: 10px;
         padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .header-container {
         display: flex;
         flex-direction: row; /* Ändert die Ausrichtung auf horizontal */
         justify-content: space-between; /* Verteilt Elemente an den Enden */
@@ -319,14 +318,22 @@ footer {
         text-align: left; /* Richtet den Text links aus */
     }
 
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    /* Mobile Navigation (unverändert) */
     nav {
         display: block;
         margin: 15px 0;
-        /* Verstecken der Navigation auf mobilen Geräten */
         position: fixed;
         top: 0;
-        left: -100%; /* Menü außerhalb des Bildschirms positionieren */
-        width: 75%; /* Menü nimmt 75% der Bildschirmbreite ein */
+        left: -100%;
+        width: 75%;
         height: 100%;
         background: var(--secondary);
         z-index: 1000;
@@ -336,14 +343,14 @@ footer {
     }
 
     nav.nav-open {
-        left: 0; /* Menü in den sichtbaren Bereich schieben */
+        left: 0;
     }
 
     nav ul {
         flex-direction: column;
         gap: 25px;
         padding: 40px 20px;
-        display: flex; /* Flexbox-Layout für vertikale Anordnung */
+        display: flex;
         text-align: left;
     }
 
@@ -419,25 +426,25 @@ footer {
     }
 
     .galerie-container img {
-        max-width: 90%; /* Responsiv für mobile Ansicht */
+        max-width: 90%;
         height: auto;
     }
 
+    /* Verbesserungen für den mobilen Countdown */
     #countdown-timer {
-        display: flex;
-        flex-direction: column;
+        flex-direction: column; /* Stapelt die Elemente vertikal */
         align-items: center;
-        gap: 15px; /* Fügt Abstand zwischen den gestapelten Elementen hinzu */
+        gap: 15px;
     }
 
     #countdown-timer span {
-        font-size: 1.5rem; /* Vergrößert die Zahl für bessere Lesbarkeit */
+        font-size: 1.5rem;
+        min-width: unset;
         text-align: center;
-        min-width: unset; /* Entfernt die Mindestbreite */
     }
 
-    #countdown-timer br {
-        display: none; /* Entfernt die Zeilenumbrüche für dieses Layout */
+    #countdown-timer label {
+        font-size: 1rem;
     }
 }
 
