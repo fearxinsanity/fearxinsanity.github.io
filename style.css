@@ -36,17 +36,14 @@ header {
     margin: 20px;
     position: relative;
     box-shadow: 0 0 20px var(--shadow);
-    display: flex; /* Wechsel auf Flexbox für vertikale Anordnung */
-    flex-direction: column;
-    align-items: center;
 }
 
+/* Desktop Header - Neue, horizontale Anordnung */
 .header-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
+    justify-content: space-between; /* Elemente an den Rändern verteilen */
+    align-items: center; /* Vertikale Zentrierung */
+    width: 100%;
 }
 
 .header-logo {
@@ -61,6 +58,8 @@ header {
 }
 
 .header-text-container {
+    flex-grow: 1;
+    text-align: center;
     padding: 0 20px;
 }
 
@@ -84,15 +83,15 @@ header p {
 
 /* Navigation - Desktop-Optimierung */
 nav {
-    margin-top: 20px; /* Abstand zum Titel */
+    justify-self: end;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Wechsel auf Flexbox */
-    gap: 15px; /* Fügt Abstand zwischen den Links hinzu */
+    display: flex;
+    gap: 15px; /* Abstand zwischen den Links */
 }
 
 nav li {
@@ -224,7 +223,7 @@ section a:hover {
     box-shadow: 0 5px 25px var(--shadow);
 }
 
-/* Countdown Styling - Desktop (neu) */
+/* Countdown Styling - Desktop */
 #countdown-timer {
     display: flex;
     justify-content: center;
@@ -298,8 +297,6 @@ footer {
 
     /* Verbesserungen für den mobilen Header */
     header {
-        margin: 10px;
-        padding: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -310,22 +307,28 @@ footer {
         flex-direction: column;
         align-items: center;
         gap: 10px;
+        margin: 10px;
     }
 
     .header-logo {
-        max-width: 60px; /* Reduziert die Größe des Logos */
-        height: auto;
+        max-width: 60px;
     }
 
     .header-text-container {
-        flex-grow: 1;
         text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
     }
 
     /* Mobile Navigation */
     nav {
-        display: block;
-        margin: 15px 0;
+        margin-top: 15px;
         position: fixed;
         top: 0;
         left: -100%;
@@ -435,14 +438,6 @@ footer {
     }
 
     #countdown-timer label {
-        font-size: 1rem;
-    }
-
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    header p {
         font-size: 1rem;
     }
 }
