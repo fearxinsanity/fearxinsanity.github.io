@@ -38,15 +38,17 @@ header {
     box-shadow: 0 0 20px var(--shadow);
 }
 
-/* Desktop Header - Neue, horizontale Anordnung */
+/* Desktop Header - Korrigiertes Grid-Layout für zentrale Überschrift */
 .header-container {
-    display: flex;
-    justify-content: space-between; /* Elemente an den Rändern verteilen */
-    align-items: center; /* Vertikale Zentrierung */
-    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Neue Spaltenstruktur */
+    align-items: center;
+    text-align: center;
+    gap: 20px; /* Abstand zwischen den Elementen */
 }
 
 .header-logo {
+    justify-self: start;
     max-width: 150px;
     height: auto;
     border: 2px solid var(--primary);
@@ -55,12 +57,12 @@ header {
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 50%;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    grid-column: 1; /* Positioniert das Logo in der ersten Spalte */
 }
 
 .header-text-container {
-    flex-grow: 1;
-    text-align: center;
     padding: 0 20px;
+    grid-column: 2; /* Positioniert die Überschrift in der zweiten, zentrierten Spalte */
 }
 
 header h1 {
@@ -83,6 +85,7 @@ header p {
 
 /* Navigation - Desktop-Optimierung */
 nav {
+    grid-column: 3; /* Positioniert die Navigation in der dritten Spalte */
     justify-self: end;
 }
 
@@ -90,7 +93,7 @@ nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: flex; /* Wechsel auf Flexbox */
     gap: 15px; /* Abstand zwischen den Links */
 }
 
@@ -311,10 +314,12 @@ footer {
     }
 
     .header-logo {
-        max-width: 60px;
+        max-width: 60px; /* Reduziert die Größe des Logos */
+        height: auto;
     }
 
     .header-text-container {
+        flex-grow: 1;
         text-align: center;
     }
 
@@ -438,6 +443,14 @@ footer {
     }
 
     #countdown-timer label {
+        font-size: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
         font-size: 1rem;
     }
 }
