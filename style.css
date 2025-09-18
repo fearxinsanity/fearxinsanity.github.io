@@ -40,7 +40,7 @@ header {
 
 .header-container {
     display: grid;
-    grid-template-columns: 1fr auto 1fr; /* This is the key change for true centering */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     text-align: center;
 }
@@ -80,24 +80,21 @@ header p {
     font-style: italic;
 }
 
-/* Navigation */
+/* Navigation - Desktop-Optimierung (neu) */
 nav {
     justify-self: end;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 10px;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: contents;
+    display: flex; /* Wechsel auf Flexbox */
+    gap: 10px; /* Fügt Abstand zwischen den Links hinzu */
 }
 
 nav li {
-    display: contents;
+    display: flex; /* Stellt sicher, dass die Listenelemente in einer Zeile bleiben */
 }
 
 nav a {
@@ -111,7 +108,7 @@ nav a {
     position: relative;
     color: var(--nav-link);
     border: 1px solid var(--nav-link);
-    display: block; /* Ensures padding works correctly */
+    display: block;
 }
 
 nav a:hover,
@@ -320,17 +317,16 @@ footer {
 
     .header-text-container {
         flex-grow: 1;
-        text-align: center; /* Korrigiert die Textausrichtung wieder auf zentriert */
+        text-align: center;
     }
 
     nav {
         display: block;
         margin: 15px 0;
-        /* Verstecken der Navigation auf mobilen Geräten */
         position: fixed;
         top: 0;
-        left: -100%; /* Menü außerhalb des Bildschirms positionieren */
-        width: 75%; /* Menü nimmt 75% der Bildschirmbreite ein */
+        left: -100%;
+        width: 75%;
         height: 100%;
         background: var(--secondary);
         z-index: 1000;
@@ -340,29 +336,24 @@ footer {
     }
 
     nav.nav-open {
-        left: 0; /* Menü in den sichtbaren Bereich schieben */
+        left: 0;
     }
 
     nav ul {
         flex-direction: column;
         gap: 25px;
         padding: 40px 20px;
-        display: flex; /* Flexbox-Layout für vertikale Anordnung */
+        display: flex;
         text-align: left;
     }
 
     nav a {
-        font-size: 18px;
-        color: var(--primary);
         padding: 15px 20px;
-        border: none;
-        border-bottom: 1px solid var(--border);
+        font-size: 18px;
     }
 
-    nav a:hover, nav a:focus, nav a:active, nav a[aria-current="page"] {
-        color: var(--accent);
+    nav a:not([aria-current="page"]):hover {
         background: rgba(192, 160, 98, 0.1);
-        box-shadow: none;
     }
 
     .nav-toggle {
@@ -429,7 +420,7 @@ footer {
 
     /* Verbesserungen für den mobilen Countdown */
     #countdown-timer {
-        flex-direction: column; /* Stapelt die Elemente vertikal */
+        flex-direction: column;
         align-items: center;
         gap: 15px;
     }
